@@ -1,6 +1,9 @@
 import React, {useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import LinkForm from '../linkForm/LinkForm';
+
+import src from '../../assets/backgrounds/bg.jpg';
 
 const MainPage = () => {
     const {isAuth} = useSelector(state => state.user);
@@ -13,8 +16,11 @@ const MainPage = () => {
     }, [isAuth, navigate]);
 
     return (
-        <div>
-            <h1>Hello World</h1>
+        <div className='page'>
+            <img src={src} alt="background" className='page__img'/>
+            <div className='page__wrapper'>
+                <LinkForm/>
+            </div>
         </div>
     );
 };

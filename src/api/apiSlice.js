@@ -21,12 +21,21 @@ export const userApiSlice = createApi({
                 url: `http://79.143.31.216/register?username=${username}&password=${password}`,
                 method: 'POST'
             })
+        }),
+        squeezeLink: builder.mutation({
+            query: ({link, token})=> ({
+                url: `http://79.143.31.216/squeeze?link=${link}`,
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
         })
         
     })
 });
 
-export const { useLoginUserMutation, useSetUserMutation } = userApiSlice;
+export const { useLoginUserMutation, useSetUserMutation, useSqueezeLinkMutation } = userApiSlice;
 
 //sneeze - http://79.143.31.216/squeeze?link=http%3A%2F%2Fwww.multitran.ru%2Fc%2Fm.exe%3Fa%3D1
 //redirect - http://79.143.31.216/s/C9DNH
