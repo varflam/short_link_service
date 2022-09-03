@@ -34,7 +34,7 @@ const Form = ({title, handleSubmit}) => {
                 id="username"
                 value={username}
                 onChange={e => setUsername(e.target.value)}
-                placeholder='username'
+                placeholder='Enter your User name'
                  />
 
             <label 
@@ -48,10 +48,11 @@ const Form = ({title, handleSubmit}) => {
                 id="password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
+                placeholder="Enter your Password"
                  />
 
             <button 
-                className='form__btn'
+                className='form__button'
                 type='submit'>{title}</button>
         </form>
     );
