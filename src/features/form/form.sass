@@ -4,6 +4,7 @@
     display: flex
     flex-direction: column
     max-width: 40vw
+    margin-top: 52px
     &__label
         font-weight: 500
         font-size: 13px
@@ -14,11 +15,11 @@
         padding: 15px
         padding-left: 20px
         margin-bottom: 42px
-        outline-color: $orange
+        outline: none
         &::placeholder
             color: #000
         &:focus
-            border-bottom: none
+            border-color: $orange
         &[type="text"]
             background: url('../../assets/icons/user.svg') no-repeat left center
         &[type="password"]
