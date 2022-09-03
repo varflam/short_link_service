@@ -4,6 +4,7 @@
     display: flex
     &__img
         max-width: 55vw
+        object-fit: cover
     &__wrapper
         padding: 30px 60px
     &__title
@@ -16,3 +17,14 @@
             text-decoration: none
             &:hover
                 text-decoration: underline
+
+@media (max-width: 768px)
+    .auth-page
+        display: block
+        &__img
+            display: none
+
+@media (max-width: 425px)
+    .auth-page
+        &__wrapper
+            padding: 20px 30px
