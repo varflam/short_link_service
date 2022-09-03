@@ -5,6 +5,8 @@ import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 import MainPage from '../pages/MainPage';
 
+import '../../style/style.sass';
+
 function App() {
   return (
     <Router>

@@ -1,19 +1,33 @@
 import React, {useState} from 'react';
 
+import './form.sass';
+
 const Form = ({title, handleSubmit}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const onSubmit = e => {
+    const onSubmit = (e) => {
         e.preventDefault();
+        const user = {
+            username,
+            password
+        };
 
-        handleSubmit();
+        handleSubmit(user);
+
+        setUsername('');
+        setPassword('');
     }
 
     return (
-        <form onSubmit={e => onSubmit(e)}>
-            <label htmlFor='username'>Your username</label>
+        <form 
+            className='form'
+            onSubmit={(e) => onSubmit(e)}>
+            <label 
+                htmlFor='username'
+                className='form__label'>Your username</label>
             <input 
+                className='form__input'
                 required
                 type="text"
                 name="username"
@@ -23,8 +37,11 @@ const Form = ({title, handleSubmit}) => {
                 placeholder='username'
                  />
 
-            <label htmlFor='password'>Your password</label>
+            <label 
+                htmlFor='password'
+                className='form__label'>Your password</label>
             <input 
+                className='form__input'
                 required
                 type="password"
                 name="password"
@@ -33,7 +50,9 @@ const Form = ({title, handleSubmit}) => {
                 onChange={e => setPassword(e.target.value)}
                  />
 
-            <button type='submit'>{title}</button>
+            <button 
+                className='form__btn'
+                type='submit'>{title}</button>
         </form>
     );
 };
