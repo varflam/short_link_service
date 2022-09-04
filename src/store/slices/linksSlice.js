@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    links: []
+    links: [],
+    error: null
 }
 
 const linkSlice = createSlice({
@@ -10,12 +11,16 @@ const linkSlice = createSlice({
     reducers: {
         setLink: (state, action) => {
             state.links.push(action.payload);
+            state.error = null;
+        },
+        setError: (state, action) => {
+            state.error = action.payload;
         }
     }
 });
 
 const {actions, reducer} = linkSlice;
 
-export const {setLink} = actions;
+export const {setLink, setError} = actions;
 
 export default reducer;
