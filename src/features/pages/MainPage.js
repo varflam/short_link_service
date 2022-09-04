@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import LinkForm from '../linkForm/LinkForm';
 import LinkList from '../linkList/LinkList';
 
-import src from '../../assets/backgrounds/bg.jpg';
 
 const MainPage = () => {
     const {isAuth} = useSelector(state => state.user);
@@ -18,10 +17,11 @@ const MainPage = () => {
 
     return (
         <div className='page'>
-            <img src={src} alt="background" className='page__img'/>
+            <div className='page__link-list__wrapper'>
+                <LinkList/>
+            </div>
             <div className='page__wrapper'>
                 <LinkForm/>
-                <LinkList/>
             </div>
         </div>
     );

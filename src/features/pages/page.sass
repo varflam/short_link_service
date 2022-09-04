@@ -18,6 +18,30 @@
             text-decoration: none
             &:hover
                 text-decoration: underline
+    &__link-list
+        display: flex
+        flex-direction: column
+        background: url('../../assets/backgrounds/bg.jpg') rgb(255, 235, 224) no-repeat
+        padding: 30px 52px 0 30px
+        &__wrapper
+            min-width: 60vw
+        &__sort
+            padding: 10px
+            background: rgba(256, 256, 256, 0.9)
+            margin-bottom: 30px
+            &__form
+                display: flex
+                flex-direction: column
+                label
+                    margin-right: 10px
+        &__table
+            table-layout: fixed
+            tr, td
+                padding-bottom: 17px
+            tr:nth-child(odd)
+                background-color: rgba(256, 256, 256, 0.9)
+            tr:nth-child(even)
+                background-color: lighten($orange, 5)
 
 @media (max-width: 768px)
     .page
