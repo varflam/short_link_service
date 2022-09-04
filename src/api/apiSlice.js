@@ -3,7 +3,14 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const userApiSlice = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://79.143.31.216'
+        baseUrl: 'http://79.143.31.216',
+        prepareHeaders: (headers, { getState }) => {
+            const token = getState().user.token
+            if (token) {
+              headers.set('authorization', `Bearer ${token}`)
+            }
+            return headers
+          }
     }),
     endpoints: builder => ({
         loginUser: builder.mutation({
@@ -18,25 +25,32 @@ export const userApiSlice = createApi({
         }),
         setUser: builder.mutation({
             query: ({password, username})=> ({
-                url: `http://79.143.31.216/register?username=${username}&password=${password}`,
+                url: `/register`,
+                params: {username, password},
                 method: 'POST'
             })
         }),
         squeezeLink: builder.mutation({
-            query: ({link, token})=> ({
-                url: `http://79.143.31.216/squeeze?link=${link}`,
+            query: link => ({
+                url: `/squeeze`,
+                params: {link},
                 method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
+            })
+        }),
+        getStatistics: builder.query({
+            query: ({order, offset = 0, limit = 0}) => ({
+                url: '/statistics',
+                params: {
+                    order,
+                    offset,
+                    limit
+                },
+                method: 'GET'
             })
         })
         
     })
 });
 
-export const { useLoginUserMutation, useSetUserMutation, useSqueezeLinkMutation } = userApiSlice;
+export const { useLoginUserMutation, useSetUserMutation, useSqueezeLinkMutation, useGetStatisticsQuery } = userApiSlice;
 
-//sneeze - http://79.143.31.216/squeeze?link=http%3A%2F%2Fwww.multitran.ru%2Fc%2Fm.exe%3Fa%3D1
-//redirect - http://79.143.31.216/s/C9DNH
-// переходы - http://79.143.31.216/statistics?order=asc_counter&offset=0&limit=1

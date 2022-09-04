@@ -6,8 +6,7 @@ import { useSqueezeLinkMutation } from '../../api/apiSlice';
 
 const LinkForm = () => {
     const [newLink, setNewLink] = useState('');
-    const {token} = useSelector(state => state.user);
-    const {links, error} = useSelector(state => state.links);
+    const {error} = useSelector(state => state.links);
     const dispatch = useDispatch();
     const [squeezeLink] = useSqueezeLinkMutation();
 
@@ -15,26 +14,7 @@ const LinkForm = () => {
         e.preventDefault();
         dispatch(setError(null));
 
-        links.forEach(link => {
-            if(link.target === newLink) {
-               dispatch(setError('You have already squeezed this link'));
-            }
-        });
-
-        const formedLink = newLink.split('').map(letter => {
-            if(letter === ':') {
-                return '%3A'
-            } else if(letter === '/') {
-                return '%2F'
-            } else return letter;
-        }).join('');
-
-        const linkInfo = {
-            link: formedLink,
-            token
-        }
-
-        squeezeLink(linkInfo)
+        squeezeLink(newLink)
             .then(res => {
                 if(res.data) {
                     const linkObj = {...res.data};
@@ -44,6 +24,7 @@ const LinkForm = () => {
                     dispatch(setError(res.error.data.detail[0].msg));
                 }
             });   
+        
         setNewLink('');
     };
 

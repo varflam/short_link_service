@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import LinkForm from '../linkForm/LinkForm';
+import LinkList from '../linkList/LinkList';
 
 import src from '../../assets/backgrounds/bg.jpg';
 
@@ -20,6 +21,7 @@ const MainPage = () => {
             <img src={src} alt="background" className='page__img'/>
             <div className='page__wrapper'>
                 <LinkForm/>
+                <LinkList/>
             </div>
         </div>
     );
