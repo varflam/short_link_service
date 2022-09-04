@@ -21,6 +21,7 @@ const Form = ({title, handleSubmit}) => {
 
     return (
         <form 
+            action="POST"
             className='form'
             onSubmit={(e) => onSubmit(e)}>
             <label 

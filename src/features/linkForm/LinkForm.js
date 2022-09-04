@@ -31,6 +31,7 @@ const LinkForm = () => {
     return (
         <>
             <form
+                action="POST"
                 className='form'
                 onSubmit={e => onSubmit(e)}>
                 <label
