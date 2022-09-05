@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    links: [],
+    sortBy: ['asc_short'],
     error: null
 }
 
@@ -15,12 +15,15 @@ const linkSlice = createSlice({
         },
         setError: (state, action) => {
             state.error = action.payload;
+        },
+        setSortBy: (state, action) => {
+            state.sortBy = action.payload;
         }
     }
 });
 
 const {actions, reducer} = linkSlice;
 
-export const {setLink, setError} = actions;
+export const {setLink, setError, setSortBy} = actions;
 
 export default reducer;

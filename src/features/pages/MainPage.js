@@ -15,7 +15,7 @@ const MainPage = () => {
         }
     }, [isAuth, navigate]);
 
-    return (
+    return isAuth ? (
         <div className='page'>
             <div className='page__link-list__wrapper'>
                 <LinkList/>
@@ -24,7 +24,7 @@ const MainPage = () => {
                 <LinkForm/>
             </div>
         </div>
-    );
+    ) : null;
 };
 
 export default MainPage;
