@@ -9,10 +9,6 @@ const linkSlice = createSlice({
     name: 'links',
     initialState,
     reducers: {
-        setLink: (state, action) => {
-            state.links.push(action.payload);
-            state.error = null;
-        },
         setError: (state, action) => {
             state.error = action.payload;
         },
@@ -24,6 +20,6 @@ const linkSlice = createSlice({
 
 const {actions, reducer} = linkSlice;
 
-export const {setLink, setError, setSortBy} = actions;
+export const {setError, setSortBy} = actions;
 
 export default reducer;

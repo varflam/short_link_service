@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setLink, setError } from '../../store/slices/linksSlice';
+import { setError } from '../../store/slices/linksSlice';
 
 import { useSqueezeLinkMutation } from '../../api/apiSlice';
 
@@ -19,7 +19,6 @@ const LinkForm = () => {
                 if(res.data) {
                     const linkObj = {...res.data};
                     linkObj.short = `79.143.31.216/s/${linkObj.short}`;
-                    dispatch(setLink(linkObj));
                 } else if(res.error) {
                     dispatch(setError(res.error.data.detail[0].msg));
                 }
