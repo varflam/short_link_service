@@ -7,50 +7,26 @@ import { setSortBy } from '../../store/slices/linksSlice';
 const LinkList = () => {
     const dispatch = useDispatch();
     const {sortBy} = useSelector(state => state.links);
+    const [activeFilter, setActiveFilter] = useState('asc_short');
     const {data: links = []} = useGetStatisticsQuery({order: sortBy}, {
         pollingInterval: 0,
         refetchOnMountOrArgChange: true
     });
-    const filtersArray = ['asc_short', 'asc_target', 'asc_counter', 'desc_short', 'desc_target', 'desc_counter'];
-    const initialValues = {};
-
-    filtersArray.forEach(filter => {
-        initialValues[filter] = false;
-    });
-
-    const [checkedFilters, setCheckedFilters] = useState(initialValues);
-
     const slicedLinks = links.slice();
 
     const elements = slicedLinks.map(({id, ...props}) => {
         return <LinkListItem key={id} {...props}/>
     });
 
-    const onSubmit = e => {
-        e.preventDefault();
-        dispatch(setSortBy([]));
 
-        const sortedFilters = [];
-        for(let filter in checkedFilters) {
-            if(checkedFilters[filter] === true) {
-                sortedFilters.push(filter);
-            }
-        }
-        dispatch(setSortBy(sortedFilters));
-        setCheckedFilters(initialValues);
-    }
+    const filtersArray = ['asc_short', 'asc_target', 'asc_counter', 'desc_short', 'desc_target', 'desc_counter'];
 
     const filters = filtersArray.map((filter) => {
-        const handleChange = (e) => {
-            const {name} = e.target;
-            for(let checkedFilter in checkedFilters) {
-                if(checkedFilter === name) {
-                    console.log(name);
-                    setCheckedFilters({...checkedFilters, [name]: !checkedFilters[checkedFilter]});
-                }
-            }
-        }
 
+        const handleChange = (e) => {
+            const {value} = e.target;
+            setActiveFilter(value);
+        }
 
         let label = '';
         switch(filter) {
@@ -76,18 +52,27 @@ const LinkList = () => {
                 label = '';
                 break;
         }
+
         return(
-            <div className="page__link-list__sort__form__group">
+            <div   
+                key={filter} 
+                className="page__link-list__sort__form__group">
                         <label htmlFor={filter}>{label}</label>
                         <input 
-                            type="checkbox" 
+                            type="radio" 
                             id={filter} 
-                            name={filter}
-                            checked={!!checkedFilters[filter]}
+                            name="filter"
+                            value={filter}
+                            checked={activeFilter === filter}
                             onChange={(e) => handleChange(e)}/>
             </div>
         )
-    })
+    });
+
+    const onSubmit = e => {
+        e.preventDefault();
+        dispatch(setSortBy([activeFilter]));
+    }
  
     return (
         <div className='page__link-list'>
