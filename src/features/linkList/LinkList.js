@@ -113,16 +113,18 @@ const LinkList = () => {
             </div>    
 
             <h2 className='page__title'>Your links:</h2>
-            <table className='page__link-list__table'>
-                <tbody>
-                    <tr>
-                        <td>Squeezed link</td>
-                        <td>Long link</td>
-                        <td>Visits</td>
-                    </tr>
-                    {elements}
-                </tbody>
-            </table>
+            <div className='page__link-list__table__wrapper'>
+                <table className='page__link-list__table'>
+                    <tbody>
+                        <tr>
+                            <td>Squeezed link</td>
+                            <td>Long link</td>
+                            <td>Visits</td>
+                        </tr>
+                        {elements}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };

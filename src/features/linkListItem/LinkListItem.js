@@ -3,7 +3,7 @@ import React from 'react';
 const LinkListItem = ({short, target, counter}) => {
     let link = '';
     if(target.length > 50) {
-        link = `${target.slice(0, 210)}...`;
+        link = `${target.slice(0, 30)}...`;
     } else {
         link = target
     }

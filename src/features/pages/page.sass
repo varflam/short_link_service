@@ -36,6 +36,8 @@
                     margin-right: 10px
         &__table
             table-layout: fixed
+            &__wrapper
+                overflow-x: scroll
             a
                 display: inline-block
                 color: #000
@@ -51,10 +53,42 @@
                 background-color: rgba(256, 256, 256, 0.9)
             tr:nth-child(even)
                 background-color: lighten($orange, 5)
+            tr
+                td:last-child
+                    display: flex
+                    align-items: center
+                    justify-content: center
+
+@media (max-width: 1242px)
+    .page
+        &__link-list
+            &__table
+                a
+                    padding: 5px
+                tr, td
+                    padding: 5px
 
 @media (max-width: 768px)
     .page
-        display: block
+        flex-direction: column
+        width: 100%
+        &__title
+            line-height: 25px
+            font-size: 25px
+        &__wrapper
+            order: 1
+            width: auto
+            padding: 15px 30px
+        &__link-list
+            &__sort
+                margin-bottom: 10px
+            &__wrapper
+                order: 2
+                width: 100%
+                a
+                    background: none
+                    box-shadow: none
+                    padding: 0
         &__img
             display: none
 
@@ -62,3 +96,7 @@
     .page
         &__wrapper
             padding: 20px 30px
+        &__link-list
+            &__wrapper
+                a
+                    font-size: 14px
