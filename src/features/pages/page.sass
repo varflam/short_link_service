@@ -5,9 +5,11 @@
     &__img
         max-width: 55vw
         object-fit: cover
-    &__wrapper
+    &__wrapper__form
         width: 100%
         padding: 30px 60px
+    &__wrapper__link-list
+        min-width: 60vw
     &__title
         font-weight: 500
         font-size: 30px
@@ -18,55 +20,6 @@
             text-decoration: none
             &:hover
                 text-decoration: underline
-    &__link-list
-        display: flex
-        flex-direction: column
-        background: url('../../assets/backgrounds/bg.jpg') rgb(255, 235, 224) no-repeat
-        padding: 30px 52px 0 30px
-        &__wrapper
-            min-width: 60vw
-        &__sort
-            padding: 10px
-            background: rgba(256, 256, 256, 0.9)
-            margin-bottom: 30px
-            &__form
-                display: flex
-                flex-direction: column
-                label
-                    margin-right: 10px
-        &__table
-            table-layout: fixed
-            &__wrapper
-                overflow-x: scroll
-            a
-                display: inline-block
-                color: #000
-                padding: 5px 15px
-                background: #fff
-                border-radius: 10px
-                box-shadow: 2px 2px 7px #818181
-                &:hover
-                    color: darken($orange, 30)
-            tr, td
-                padding: 10px
-            tr:nth-child(odd)
-                background-color: rgba(256, 256, 256, 0.9)
-            tr:nth-child(even)
-                background-color: lighten($orange, 5)
-            tr
-                td:last-child
-                    display: flex
-                    align-items: center
-                    justify-content: center
-
-@media (max-width: 1242px)
-    .page
-        &__link-list
-            &__table
-                a
-                    padding: 5px
-                tr, td
-                    padding: 5px
 
 @media (max-width: 768px)
     .page
@@ -75,28 +28,17 @@
         &__title
             line-height: 25px
             font-size: 25px
-        &__wrapper
+        &__wrapper__form
             order: 1
             width: auto
             padding: 15px 30px
-        &__link-list
-            &__sort
-                margin-bottom: 10px
-            &__wrapper
-                order: 2
-                width: 100%
-                a
-                    background: none
-                    box-shadow: none
-                    padding: 0
+        &__wrapper__list-lst
+            order: 2
+            width: 100%
         &__img
             display: none
 
 @media (max-width: 425px)
     .page
-        &__wrapper
+        &__wrapper__form
             padding: 20px 30px
-        &__link-list
-            &__wrapper
-                a
-                    font-size: 14px

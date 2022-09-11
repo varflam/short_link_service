@@ -11,7 +11,7 @@ const LoginPage = () => {
     return (
         <div className='page'>
             <img src={src} alt="background" className='page__img'/>
-            <div className='page__wrapper'>
+            <div className='page__wrapper__form'>
                 <h1 className='page__title'>Sign In</h1>
                 <p className='page__descr'>If you don’t have an account register</p>
                 <p className='page__descr'>You can <Link to="/register">Register here</Link>!</p>

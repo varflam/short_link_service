@@ -1,0 +1,42 @@
+@import '../../style/variables.sass'
+
+.link-list
+    &__table
+        &__tr, &__td
+            padding: 10px
+        &__tr:nth-child(odd)
+            background-color: rgba(256, 256, 256, 0.9)
+        &__tr:nth-child(even)
+            background-color: lighten($orange, 5)
+        &__tr
+            td:last-child
+                display: flex
+                align-items: center
+                justify-content: center
+        &__link
+            display: inline-block
+            color: #000
+            padding: 5px 15px
+            background: #fff
+            border-radius: 10px
+            box-shadow: 2px 2px 7px #818181
+            &:hover
+                color: darken($orange, 30)
+
+@media (max-width: 1242px)
+    .link-list
+        &__table
+            &__link
+                padding: 5px
+
+@media (max-width: 768px)
+    .link-list
+        &__link
+            background: none
+            box-shadow: none
+            padding: 0
+
+@media (max-width: 425px)
+    .link-list
+        &__link
+            font-size: 14px

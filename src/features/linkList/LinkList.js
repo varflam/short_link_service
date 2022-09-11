@@ -6,6 +6,8 @@ import LinkListItem from '../linkListItem/LinkListItem';
 import { setSortBy } from '../../store/slices/linksSlice';
 import { setError, setAuthUser,  } from '../../store/slices/userSlice';
 
+import './linkList.sass';
+
 const LinkList = () => {
     const dispatch = useDispatch();
     const {sortBy} = useSelector(state => state.links);
@@ -36,6 +38,7 @@ const LinkList = () => {
             }, 180000);
 
         return () => clearInterval(timerId);
+    // eslint-disable-next-line
     }, []);
 
     const slicedLinks = links.slice();
@@ -100,11 +103,11 @@ const LinkList = () => {
     }
  
     return (
-        <div className='page__link-list'>
-            <div className='page__link-list__sort'>
+        <div className='link-list'>
+            <div className='link-list__sort'>
                 <p>Sort by:</p>
                 <form 
-                    className="page__link-list__sort__form"
+                    className="link-list__sort__form"
                     onSubmit={e => onSubmit(e)}>
                     {filters}
                     <button type="submit" className='form__button form__button_link-list'>Sort</button>
@@ -112,14 +115,14 @@ const LinkList = () => {
 
             </div>    
 
-            <h2 className='page__title'>Your links:</h2>
-            <div className='page__link-list__table__wrapper'>
-                <table className='page__link-list__table'>
+            <h2 className='link-list__title'>Your links:</h2>
+            <div className='link-list__wrapper'>
+                <table className='link-list__table'>
                     <tbody>
-                        <tr>
-                            <td>Squeezed link</td>
-                            <td>Long link</td>
-                            <td>Visits</td>
+                        <tr className='link-list__table__tr'>
+                            <td className='link-list__table__td'>Squeezed link</td>
+                            <td className='link-list__table__td'>Long link</td>
+                            <td className='link-list__table__td'>Visits</td>
                         </tr>
                         {elements}
                     </tbody>

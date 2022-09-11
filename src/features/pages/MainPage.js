@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import LinkForm from '../linkForm/LinkForm';
 import LinkList from '../linkList/LinkList';
 
+import './page.sass';
+
 
 const MainPage = () => {
     const {isAuth} = useSelector(state => state.user);
@@ -17,10 +19,10 @@ const MainPage = () => {
 
     return isAuth ? (
         <div className='page'>
-            <div className='page__link-list__wrapper'>
+            <div className='page__wrapper__link-list'>
                 <LinkList/>
             </div>
-            <div className='page__wrapper'>
+            <div className='page__wrapper__form'>
                 <LinkForm/>
             </div>
         </div>

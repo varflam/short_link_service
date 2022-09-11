@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './linkListItem.sass';
+
 const LinkListItem = ({short, target, counter}) => {
     let link = '';
     if(target.length > 50) {
@@ -8,16 +10,20 @@ const LinkListItem = ({short, target, counter}) => {
         link = target
     }
     return (
-        <tr>
-           <td>
-                <a href={`http://79.143.31.216/s/${short}`}>
+        <tr className='link-list__table__tr'>
+           <td className='link-list__table__td'>
+                <a 
+                    className='link-list__table__link' 
+                    href={`http://79.143.31.216/s/${short}`}>
                     {`79.143.31.216/s/${short}`}
                 </a>
            </td> 
-           <td>
-                <a href={`${target}`}>{link}</a>
+           <td className='link-list__table__td'>
+                <a 
+                    className='link-list__table__link'
+                    href={`${target}`}>{link}</a>
             </td>
-           <td>{counter}</td>
+           <td className='link-list__table__td'>{counter}</td>
         </tr>
     );
 };

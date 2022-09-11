@@ -4,6 +4,8 @@ import { setError } from '../../store/slices/linksSlice';
 
 import { useSqueezeLinkMutation } from '../../api/apiSlice';
 
+import './linkForm.sass';
+
 const LinkForm = () => {
     const [newLink, setNewLink] = useState('');
     const {error} = useSelector(state => state.links);
