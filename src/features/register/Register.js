@@ -1,9 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { useSetUserMutation, useLoginUserMutation } from '../../api/apiSlice';
-import { setAuthUser, setError } from '../../store/slices/userSlice';
-import { formLoginUser } from '../login/Login';
+import { useSetUserMutation } from '../../api/apiSlice';
+import { setError } from '../../store/slices/userSlice';
+import useLoginUser from '../../hooks/useLoginUser';
 
 import Form from '../form/Form';
 
@@ -11,8 +10,7 @@ const Register = () => {
     const dispatch = useDispatch();
     const {error} = useSelector(state => state.user);
     const [setUser] = useSetUserMutation();
-    const [loginUser] = useLoginUserMutation();
-    const navigate = useNavigate();
+    const {onLoginUser} = useLoginUser();
 
     const onSubmit = (user) => {
         setUser(user)
@@ -20,17 +18,7 @@ const Register = () => {
                 if(res.error) {
                     dispatch(setError(res.error.data.detail));
                 } else if(res.data) {
-                    loginUser(formLoginUser(user))
-                        .then(res => {
-                            if(res.error) {
-                                dispatch(setError(res.error.data.detail));
-                            } else if(res.data) {
-                                dispatch(setAuthUser({
-                                    ...user,
-                                    token: res.data.access_token}));
-                                navigate('/');
-                            }
-                        });
+                    onLoginUser(user);
                 }
             });
     }

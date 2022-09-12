@@ -8,16 +8,16 @@ import './page.sass';
 
 
 const MainPage = () => {
-    const {isAuth} = useSelector(state => state.user);
+    const {token} = useSelector(state => state.user);
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(!isAuth) {
+        if(!token) {
             return navigate('/login');
         }
-    }, [isAuth, navigate]);
+    }, [token, navigate]);
 
-    return isAuth ? (
+    return token ? (
         <div className='page'>
             <div className='page__wrapper__link-list'>
                 <LinkList/>

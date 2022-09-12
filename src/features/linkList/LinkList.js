@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useGetStatisticsQuery, useLoginUserMutation } from '../../api/apiSlice';
-import { formLoginUser } from '../login/Login';
+import { useGetStatisticsQuery } from '../../api/apiSlice';
 import LinkListItem from '../linkListItem/LinkListItem';
 import { setSortBy } from '../../store/slices/linksSlice';
-import { setError, setAuthUser,  } from '../../store/slices/userSlice';
+import useLoginUser from '../../hooks/useLoginUser';
 
 import './linkList.sass';
 
@@ -12,13 +11,13 @@ const setContent = (process, elements) => {
     switch (process) {
         case 'waiting':
             return (<tr className="link-list__notice">
-                        <td colspan="3" >Please wait...</td>
+                        <td colSpan="3" >Please wait...</td>
                     </tr>)
         case 'confirmed':
             return elements;
         case 'error':
             return (<tr className="link-list__notice">
-                        <td colspan="3" >Unexpected error</td>
+                        <td colSpan="3" >Unexpected error</td>
                     </tr>)
         default:
             throw new Error('Unexpected error');
@@ -38,7 +37,7 @@ const LinkList = () => {
         pollingInterval: 1000,
         refetchOnMountOrArgChange: true
     });
-    const [loginUser] = useLoginUserMutation();
+    const {onLoginUser} = useLoginUser(false);
 
     useEffect(() => {
         const timerId = setInterval(() => {
@@ -46,16 +45,7 @@ const LinkList = () => {
                 username,
                 password
             }
-            loginUser(formLoginUser(user))
-                .then(res => {
-                    if(res.error) {
-                        dispatch(setError(res.error.data.detail));
-                    } else if(res.data) {
-                        dispatch(setAuthUser({
-                            ...user,
-                            token: res.data.access_token}));
-                    }
-                });
+            onLoginUser(user);
             }, 180000);
 
         return () => clearInterval(timerId);
@@ -64,20 +54,28 @@ const LinkList = () => {
 
     const slicedLinks = links.slice();
 
-    const elements = slicedLinks.map(({id, ...props}) => {
-        return <LinkListItem key={id} {...props}/>
-    });
-
     const setView = () => {
         if(isLoading) {
             return setContent('waiting');
-        } else if(links.length > 0) {
+        } else if(links) {
             return setContent('confirmed', elements);
         } else if (isError) {
             return setContent('error');
         } else {
             setContent();
         }
+    }
+    
+    let elements = null;
+
+    if(slicedLinks.length > 0) {
+        elements = slicedLinks.map(({id, ...props}) => {
+            return <LinkListItem key={id} {...props}/>
+        });
+    } else {
+        elements = (<tr className="link-list__notice">
+                        <td colSpan="3" >There is no links yet</td>
+                    </tr>);
     }
 
     const filtersArray = ['asc_short', 'asc_target', 'asc_counter', 'desc_short', 'desc_target', 'desc_counter'];
