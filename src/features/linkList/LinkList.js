@@ -8,12 +8,33 @@ import { setError, setAuthUser,  } from '../../store/slices/userSlice';
 
 import './linkList.sass';
 
+const setContent = (process, elements) => {
+    switch (process) {
+        case 'waiting':
+            return (<tr className="link-list__notice">
+                        <td colspan="3" >Please wait...</td>
+                    </tr>)
+        case 'confirmed':
+            return elements;
+        case 'error':
+            return (<tr className="link-list__notice">
+                        <td colspan="3" >Unexpected error</td>
+                    </tr>)
+        default:
+            throw new Error('Unexpected error');
+    }
+};
+
 const LinkList = () => {
     const dispatch = useDispatch();
     const {sortBy} = useSelector(state => state.links);
     const {username, password} = useSelector(state => state.user);
     const [activeFilter, setActiveFilter] = useState('asc_short');
-    const {data: links = []} = useGetStatisticsQuery({order: sortBy}, {
+    const {
+        data: links = [],
+        isLoading,
+        isError
+        } = useGetStatisticsQuery({order: sortBy}, {
         pollingInterval: 1000,
         refetchOnMountOrArgChange: true
     });
@@ -46,6 +67,18 @@ const LinkList = () => {
     const elements = slicedLinks.map(({id, ...props}) => {
         return <LinkListItem key={id} {...props}/>
     });
+
+    const setView = () => {
+        if(isLoading) {
+            return setContent('waiting');
+        } else if(links.length > 0) {
+            return setContent('confirmed', elements);
+        } else if (isError) {
+            return setContent('error');
+        } else {
+            setContent();
+        }
+    }
 
     const filtersArray = ['asc_short', 'asc_target', 'asc_counter', 'desc_short', 'desc_target', 'desc_counter'];
 
@@ -124,7 +157,7 @@ const LinkList = () => {
                             <td className='link-list__table__td'>Long link</td>
                             <td className='link-list__table__td'>Visits</td>
                         </tr>
-                        {elements}
+                        {setView()}
                     </tbody>
                 </table>
             </div>
