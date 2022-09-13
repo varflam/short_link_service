@@ -1,10 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import useLoginUser from '../../hooks/useLoginUser';
+import setContent from '../../utils/setContent';
 import Form from '../form/Form';
 
 const Login = () => {
-    const {error} = useSelector(state => state.user);
+    const {error, status} = useSelector(state => state.user);
     const {onLoginUser} = useLoginUser();
 
     const onSubmit = (user) => {
@@ -13,8 +14,8 @@ const Login = () => {
 
     return (
         <>
-            {error ? <p style={{'color': 'red'}}>{error}</p> : null}
             <Form title="Sign in" handleSubmit={onSubmit}/>
+            {setContent(status, error)}
         </>
     );
 };

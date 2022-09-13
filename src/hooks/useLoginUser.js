@@ -1,6 +1,6 @@
 import { useLoginUserMutation } from '../api/apiSlice';
 import { useDispatch } from 'react-redux';
-import { setAuthUser, setError } from '../store/slices/userSlice';
+import { setAuthUser, setError, setLoading } from '../store/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
 
 const useLoginUser = (navigation = true) => {
@@ -22,6 +22,7 @@ const useLoginUser = (navigation = true) => {
 
     const onLoginUser = (user) => loginUser(formLoginUser(user))
             .then(res => {
+                dispatch(setLoading());
                 if(res.error) {
                     dispatch(setError(res.error.data.detail));
                 } else if(res.data) {
@@ -34,7 +35,9 @@ const useLoginUser = (navigation = true) => {
                 }
             });
 
-    return {onLoginUser};
+    return {
+        onLoginUser
+    };
     
 }
 
