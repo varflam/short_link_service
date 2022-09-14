@@ -4,7 +4,6 @@ import { useGetStatisticsQuery } from '../../api/apiSlice';
 import LinkListItem from '../linkListItem/LinkListItem';
 import LinkFilter from '../linkFilter/LinkFilter';
 import useLoginUser from '../../hooks/useLoginUser';
-
 import './linkList.sass';
 
 const setContent = (process, elements) => {

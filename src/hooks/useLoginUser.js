@@ -1,7 +1,8 @@
-import { useLoginUserMutation } from '../api/apiSlice';
 import { useDispatch } from 'react-redux';
-import { setAuthUser, setError, setLoading } from '../store/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
+import { useLoginUserMutation } from '../api/apiSlice';
+import { setAuthUser, setError, setLoading } from '../store/slices/userSlice';
+
 
 const useLoginUser = (navigation = true) => {
     const [loginUser] = useLoginUserMutation();

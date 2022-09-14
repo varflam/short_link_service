@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useSetUserMutation } from '../../api/apiSlice';
 import { setError } from '../../store/slices/userSlice';
 import useLoginUser from '../../hooks/useLoginUser';
+import useCookieService from '../../hooks/useCookieService';
 import setContent from '../../utils/setContent';
 
 import Form from '../form/Form';
@@ -12,8 +13,10 @@ const Register = () => {
     const {error, status} = useSelector(state => state.user);
     const [setUser] = useSetUserMutation();
     const {onLoginUser} = useLoginUser();
+    const {setCookieForUser} = useCookieService();
 
     const onSubmit = (user) => {
+        setCookieForUser(user);
         setUser(user)
             .then(res => {
                 if(res.error) {
