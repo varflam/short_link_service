@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import useCookieService from '../../hooks/useCookieService';
 import LinkForm from '../linkForm/LinkForm';
 import LinkList from '../linkList/LinkList';
 import Logout from '../logout/Logout';
@@ -9,16 +9,16 @@ import './page.sass';
 
 
 const MainPage = () => {
-    const {token} = useSelector(state => state.user);
     const navigate = useNavigate();
+    const {cookies} = useCookieService();
 
     useEffect(() => {
-        if(!token) {
+        if(!cookies.token) {
             return navigate('/login');
-        }
-    }, [token, navigate]);
+        } 
+    }, [cookies.token, navigate]);
 
-    return token ? (
+    return cookies.token ? (
         <div className='page'>
             <div className='page__wrapper__link-list'>
                 <Logout/>

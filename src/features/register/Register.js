@@ -13,10 +13,7 @@ const Register = () => {
     const {error, status} = useSelector(state => state.user);
     const [setUser] = useSetUserMutation();
     const {onLoginUser} = useLoginUser();
-    const {setCookieForUser} = useCookieService();
-
     const onSubmit = (user) => {
-        setCookieForUser(user);
         setUser(user)
             .then(res => {
                 if(res.error) {

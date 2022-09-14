@@ -1,13 +1,15 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useLoginUserMutation } from '../api/apiSlice';
-import { setAuthUser, setError, setLoading } from '../store/slices/userSlice';
+import { setToken, setError, setLoading } from '../store/slices/userSlice';
+import useCookieService from './useCookieService';
 
 
 const useLoginUser = (navigation = true) => {
     const [loginUser] = useLoginUserMutation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const {setCookieToken} = useCookieService();
 
     const formLoginUser = (user) => {
         let formBody = [];
@@ -27,9 +29,8 @@ const useLoginUser = (navigation = true) => {
                 if(res.error) {
                     dispatch(setError(res.error.data.detail));
                 } else if(res.data) {
-                    dispatch(setAuthUser({
-                        ...user,
-                        token: res.data.access_token}));
+                    dispatch(setToken(res.data.access_token));
+                        setCookieToken(res.data.access_token);
                     if(navigation) {
                         navigate('/');
                     }

@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useGetStatisticsQuery } from '../../api/apiSlice';
+import useLoginUser from '../../hooks/useLoginUser';
+import useCookieService from '../../hooks/useCookieService';
+import { setToken } from '../../store/slices/userSlice';
 import LinkListItem from '../linkListItem/LinkListItem';
 import LinkFilter from '../linkFilter/LinkFilter';
-import useLoginUser from '../../hooks/useLoginUser';
+
 import './linkList.sass';
 
 const setContent = (process, elements) => {
@@ -25,18 +28,21 @@ const setContent = (process, elements) => {
 
 const LinkList = () => {
     const {sortBy} = useSelector(state => state.links);
+    const dispatch = useDispatch();
     const {username, password} = useSelector(state => state.user);
+    const {cookies} = useCookieService();
     const {
         data: links = [],
         isLoading,
         isError
         } = useGetStatisticsQuery({order: sortBy}, {
-        // pollingInterval: 1000,
+        pollingInterval: 1000,
         refetchOnMountOrArgChange: true
     });
     const {onLoginUser} = useLoginUser(false);
 
     useEffect(() => {
+        dispatch(setToken(cookies.token));
         const timerId = setInterval(() => {
             const user = {
                 username,

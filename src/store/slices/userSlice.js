@@ -3,9 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     error: null,
     status: 'waiting',
-    token: null,
-    username: null,
-    password: null
+    token: null
 };
 
 const userSlice = createSlice({
@@ -17,13 +15,6 @@ const userSlice = createSlice({
             state.status = 'error';
             state.token = null;
         },
-        setAuthUser: (state, action) => {
-            state.status = 'confirmed';
-            state.error = null;
-            state.token = action.payload.token;
-            state.username = action.payload.username;
-            state.password = action.payload.password;
-        },
         setLoading: (state) => {
             state.status = 'loading';
             state.error = null;
@@ -32,13 +23,16 @@ const userSlice = createSlice({
             state.error = null;
             state.status = 'waiting';
             state.token = null;
-            state.username = null;
-            state.password = null;
+        },
+        setToken: (state, action) => {
+            state.token = action.payload;
+            state.status = 'confirmed';
+            state.error = null;
         }
     }
 });
 
 const {actions, reducer} = userSlice;
 
-export const {setError, setAuthUser, setLoading, logUserOut} = actions;
+export const {setError, setLoading, logUserOut, setToken} = actions;
 export default reducer;

@@ -1,22 +1,19 @@
 import { useCookies } from 'react-cookie';
 
 const useCookieService = () => {
-    const [cookies, setCookie, removeCookie] = useCookies(['username', 'password', 'token']);
+    const [cookies, setCookie, removeCookie] = useCookies(['token']);
 
-    const setCookieForUser = user => {
-        const {username, password} = user;
-        setCookie('username', username, { path: '/' });
-        setCookie('password', password, { path: '/' });
+    const setCookieToken = token => {
+        setCookie('token', token, { path: '/' });
     }
 
-    const removeCookieForUser = () => {
-        removeCookie('username', { path: '/' });
-        removeCookie('password', { path: '/' });
+    const removeCookieToken = () => {
+        removeCookie('token', { path: '/' });
     }
 
     return {
-        setCookieForUser,
-        removeCookieForUser,
+        setCookieToken,
+        removeCookieToken,
         cookies
     };
 };

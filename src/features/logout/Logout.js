@@ -6,11 +6,12 @@ import { logUserOut } from '../../store/slices/userSlice';
 import './logout.sass';
 
 const Logout = () => {
-    const {removeCookieForUser} = useCookieService();
+    const {removeCookieForUser, removeCookieToken} = useCookieService();
     const dispatch = useDispatch();
 
     const onLogOut = () => {
-        removeCookieForUser();
+        // removeCookieForUser();
+        removeCookieToken();
         dispatch(logUserOut());
     }
 
