@@ -11,7 +11,7 @@ const Login = () => {
     const {cookies, setCookieForUser} = useCookieService();
 
     useEffect(() => {
-        if(cookies) {
+        if(cookies.username) {
             const user = {
                 username: cookies.username,
                 password: cookies.password

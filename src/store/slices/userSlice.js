@@ -27,11 +27,18 @@ const userSlice = createSlice({
         setLoading: (state) => {
             state.status = 'loading';
             state.error = null;
+        },
+        logUserOut: (state) => {
+            state.error = null;
+            state.status = 'waiting';
+            state.token = null;
+            state.username = null;
+            state.password = null;
         }
     }
 });
 
 const {actions, reducer} = userSlice;
 
-export const {setError, setAuthUser, setLoading} = actions;
+export const {setError, setAuthUser, setLoading, logUserOut} = actions;
 export default reducer;

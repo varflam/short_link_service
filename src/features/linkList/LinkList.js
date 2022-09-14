@@ -31,7 +31,7 @@ const LinkList = () => {
         isLoading,
         isError
         } = useGetStatisticsQuery({order: sortBy}, {
-        pollingInterval: 1000,
+        // pollingInterval: 1000,
         refetchOnMountOrArgChange: true
     });
     const {onLoginUser} = useLoginUser(false);
