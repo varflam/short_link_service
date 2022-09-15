@@ -9,7 +9,7 @@ const useLoginUser = (navigation = true) => {
     const [loginUser] = useLoginUserMutation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {setCookieToken} = useCookieService();
+    const {setCookieToken, setUserCookie} = useCookieService();
 
     const formLoginUser = (user) => {
         let formBody = [];
@@ -30,7 +30,8 @@ const useLoginUser = (navigation = true) => {
                     dispatch(setError(res.error.data.detail));
                 } else if(res.data) {
                     dispatch(setToken(res.data.access_token));
-                        setCookieToken(res.data.access_token);
+                    setCookieToken(res.data.access_token);
+                    setUserCookie(user.username, user.password);
                     if(navigation) {
                         navigate('/');
                     }

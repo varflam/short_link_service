@@ -29,7 +29,6 @@ const setContent = (process, elements) => {
 const LinkList = () => {
     const {sortBy} = useSelector(state => state.links);
     const dispatch = useDispatch();
-    const {username, password} = useSelector(state => state.user);
     const {cookies} = useCookieService();
     const {
         data: links = [],
@@ -45,8 +44,8 @@ const LinkList = () => {
         dispatch(setToken(cookies.token));
         const timerId = setInterval(() => {
             const user = {
-                username,
-                password
+                username: cookies.username,
+                password: cookies.password
             }
             onLoginUser(user);
             }, 180000);
