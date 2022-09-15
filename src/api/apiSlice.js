@@ -20,14 +20,16 @@ export const userApiSlice = createApi({
                 body: user,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
-                }
+                },
+                referrerPolicy: "unsafe-url" 
             })
         }),
         setUser: builder.mutation({
             query: ({password, username})=> ({
                 url: `/register`,
                 params: {username, password},
-                method: 'POST'
+                method: 'POST',
+                referrerPolicy: "unsafe-url" 
             })
         }),
         squeezeLink: builder.mutation({
@@ -35,6 +37,7 @@ export const userApiSlice = createApi({
                 url: `/squeeze`,
                 params: {link},
                 method: 'POST',
+                referrerPolicy: "unsafe-url" 
             })
         }),
         getStatistics: builder.query({
@@ -45,7 +48,8 @@ export const userApiSlice = createApi({
                     offset,
                     limit
                 },
-                method: 'GET'
+                method: 'GET',
+                referrerPolicy: "unsafe-url" 
             })
         })
         

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useSetUserMutation } from '../../api/apiSlice';
 import { setError } from '../../store/slices/userSlice';
 import useLoginUser from '../../hooks/useLoginUser';
-import useCookieService from '../../hooks/useCookieService';
 import setContent from '../../utils/setContent';
 
 import Form from '../form/Form';
