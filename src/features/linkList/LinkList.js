@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useGetStatisticsQuery } from '../../api/apiSlice';
 import useLoginUser from '../../hooks/useLoginUser';
@@ -30,11 +30,13 @@ const LinkList = () => {
     const {sortBy} = useSelector(state => state.links);
     const dispatch = useDispatch();
     const {cookies} = useCookieService();
+    const [isSkipped, setIsSkipped] = useState(true);
     const {
         data: links = [],
         isLoading,
         isError
-        } = useGetStatisticsQuery({order: sortBy}, {
+    } = useGetStatisticsQuery({order: sortBy}, {
+        skip: isSkipped,
         pollingInterval: 1000,
         refetchOnMountOrArgChange: true
     });
@@ -42,6 +44,7 @@ const LinkList = () => {
 
     useEffect(() => {
         dispatch(setToken(cookies.token));
+        setIsSkipped(false);
         const timerId = setInterval(() => {
             const user = {
                 username: cookies.username,
@@ -59,10 +62,10 @@ const LinkList = () => {
     const setView = () => {
         if(isLoading) {
             return setContent('waiting');
-        } else if(links) {
-            return setContent('confirmed', elements);
         } else if (isError) {
             return setContent('error');
+        } else if(links) {
+            return setContent('confirmed', elements);
         } else {
             setContent();
         }
