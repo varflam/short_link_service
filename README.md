@@ -1,4 +1,4 @@
-<h1 align="center">squeeze your link!</h1>
+<h1 align="center">Squeeze your link!</h1>
 
 ![App screenshot](./src/assets/readme/screenshot.png)
 
