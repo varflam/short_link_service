@@ -1,46 +1,38 @@
-# Getting Started with Create React App and Redux
+<h1 align="center">Coffee shop</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+![App screenshot](./src/assets/readme/screenshot.png)
 
-## Available Scripts
+## What is this web application for? 🚀
 
-In the project directory, you can run:
+This application is a service for link shortening. You can short a link and see all your statistics. Adaptive design is available.
 
-### `npm start`
+You need to authorize to use this service.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Backend by `http://79.143.31.216/docs#/`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features 💡
 
-### `npm test`
+- Login and register
+- Short pasted link
+- Get statistics of all your links
+- Check number of visits of a shorted link
+- Sort the statistics table
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technologies ⚒
 
-### `npm run build`
+- Javascript ES6
+- React
+- Redux (including RTK)
+- React Router
+- React Cookie
+- BEM
+- CSS5
+- SASS
+- HTML5
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Setting up development environment 📍
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- `git clone https://github.com/varflam/short_link_service.git`
+- `npm install`
+- `npm start`
+- App should now be running on `http://localhost:3000/`
